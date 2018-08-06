@@ -5,9 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var index = require('./routes/index');
+
+//-------------- Modules--------------------
+
 var users = require('./routes/users');
-var authProc = require('./routes/authProc');
+var questions = require('./routes/questions');
+var auth = require('./routes/auth');
 
 var app = express();
 
@@ -15,17 +18,19 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(cors({origin: '*'}));
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/auth', authProc);
+//------------routes------
 
+app.use('/users', users);
+app.use('/questions', questions);
+app.use('/auth', auth);
+
+//---------- Error Handling-----------------
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

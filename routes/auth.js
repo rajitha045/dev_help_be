@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var con = require('./connection');
 
-
 router.post('/', function(req, res, next) {
   var username=req.body.body.username;
   var password=req.body.body.password;
